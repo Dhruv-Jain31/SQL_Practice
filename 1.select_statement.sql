@@ -28,7 +28,6 @@ SELECT productCode AS "Code",
 FROM classicmodels.products;
 
 -- WHERE: with condition
-
 SELECT * FROM classicmodels.orders WHERE status='Shipped';
 SELECT * FROM classicmodels.orders WHERE status<>'Shipped';  --<> not equal to
 
@@ -40,6 +39,26 @@ SELECT * FROM classicmodels.payments
     WHERE NOT(amount>=40000 AND amount<=60000);
 
 -- AND and OR in single operator
-
 SELECT * FROM classicmodels.payments
     WHERE (amount <= 40000 OR amount >= 60000) AND paymentDate >= '2004-01-01';
+
+-- WHERE: with IN operator
+SELECT * FROM classicmodels.employees WHERE officeCode=1 OR officeCode=2 OR officeCode=3;
+SELECT * FROM classicmodels.employees WHERE officeCode IN (1, 2, 3);
+SELECT * FROM classicmodels.employees WHERE officeCode NOT IN (1, 2, 3);
+
+-- WHERE: with BETWEEN operator
+SELECT * FROM classicmodels.customers WHERE creditLimit >= 50000 AND creditLimit <= 100000;
+SELECT * FROM classicmodels.customers WHERE creditLimit BETWEEN 50000 AND 100000;
+
+--OTHER EXAMPLE
+SELECT * FROM classicmodels.customers WHERE creditLimit BETWEEN '2003-05-31' AND '2004-05-31'; # BETWEEN can be used with date values as well
+
+-- WHERE: with LIKE operator
+SELECT * FROM classicmodels.employess WHERE jobTitle LIKE 'Manager%';  -- starts with sale
+SELECT * FROM classicmodels.employees WHERE jobTitle LIKE '%Manager';  -- ends with Manager
+SELECT * FROM classicmodels.employees WHERE jobTitle LIKE '%Manager%';  -- contains Manager
+SELECT * FROM classicmodels.employees WHERE jobTitle LIKE '_Manager';  -- _ only one character before Manager
+SELECT * FROM classicmodels.employees WHERE jobTitle LIKE 'M_nager';  -- _ can be used to replace a single character
+SELECT * FROM classicmodels.employees WHERE jobTitle LIKE '___Manager';  -- _ can be used to replace multiple characters, here 3 characters before Manager
+SELECT * FROM classicmodels.employees WHERE jobTitle LIKE '___Manager___'; -- _ can be used to replace multiple characters, here 3 characters before and 3 characters after Manager
