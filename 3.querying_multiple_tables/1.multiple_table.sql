@@ -5,7 +5,28 @@ SELECT payments.customerNumber,
         paymentDate,
         amount,
         customerName
-
 FROM payments
 INNER JOIN customers ON payments.customerNumber = customers.customerNumber
 WHERE amount > 50000
+
+
+--using aliases
+SELECT p.customerNumber AS "Customer Number",
+        p.paymentDate AS "Payment Date",
+        p.amount AS "Amount",
+        c.customerName AS "Customer Name"
+FROM payments AS p
+INNER JOIN customers AS c ON p.customerNumber = c.customerNumber
+WHERE p.amount > 50000;
+
+
+--joining multiple tables
+SELECT orderNumber,
+        status,
+        o.customerNumber,
+        c.customerName,
+        e.firstName AS "Sales Person Name",
+        e.jobTitle
+FROM orders AS o
+JOIN customers AS c ON o.customerNumber = c.customerNumber  --first join
+JOIN employees AS e ON o.salesRepEmployeeNumber = e.employeeNumber; --second join
