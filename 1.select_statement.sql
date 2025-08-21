@@ -62,3 +62,24 @@ SELECT * FROM classicmodels.employees WHERE jobTitle LIKE '_Manager';  -- _ only
 SELECT * FROM classicmodels.employees WHERE jobTitle LIKE 'M_nager';  -- _ can be used to replace a single character
 SELECT * FROM classicmodels.employees WHERE jobTitle LIKE '___Manager';  -- _ can be used to replace multiple characters, here 3 characters before Manager
 SELECT * FROM classicmodels.employees WHERE jobTitle LIKE '___Manager___'; -- _ can be used to replace multiple characters, here 3 characters before and 3 characters after Manager
+
+--REGEXP operator
+    -- REGEXP is used for pattern matching
+    -- ^ is used to match the start of a string
+    -- $ is used to match the end of a string
+    -- | is used to match either of the patterns(logical OR)
+    -- [abcd] is used to match any one of the characters in the brackets
+    -- [a-z] is used to match any one of the characters in the range
+    -- [^abcd] is used to match any character except the ones in the brackets
+    -- [abcd$] is used to match any character in the brackets or the end of the string
+
+SELECT * FROM classicmodels.employees WHERE jobTitle REGEXP 'Manager';  -- contains Manager
+SELECT * FROM classicmodels.employees WHERE jobTitle REGEXP '^Manager';  -- starts with Manager
+SELECT * FROM classicmodels.employees WHERE jobTitle REGEXP 'Manager$';  -- ends with Manager
+SELECT * FROM classicmodels.employees WHERE jobTitle REGEXP 'Manager|Director';  -- contains Manager or Director
+SELECT * FROM classicmodels.employees WHERE jobTitle REGEXP '^a|^b';  -- starts with a lowercase or b lowercase letter
+SELECT * FROM classicmodels.employees WHERE jobTitle REGEXP '^[a-z]|[m-p]$';  -- starts with a lowercase letter and ends with a lowercase letter between m and p
+SELECT * FROM classicmodels.employees WHERE jobTitle REGEXP '^[A-Z]';  -- starts with an uppercase letter
+SELECT * FROM classicmodels.employees WHERE jobTitle REGEXP '^[A-Z][a-z]';  -- starts with an uppercase letter followed by a lowercase letter
+SELECT * FROM classicmodels.employees WHERE jobTitle REGEXP '^[A-Z][a-z]{2}';  -- starts with an uppercase letter followed by 2 lowercase letters
+SELECT * FROM classicmodels.employees WHERE jobTitle REGEXP '^[A-Z][a-z]{2,}';  -- starts with an uppercase letter followed by 2 or more lowercase letters
