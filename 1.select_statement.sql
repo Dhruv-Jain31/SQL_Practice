@@ -83,3 +83,9 @@ SELECT * FROM classicmodels.employees WHERE jobTitle REGEXP '^[A-Z]';  -- starts
 SELECT * FROM classicmodels.employees WHERE jobTitle REGEXP '^[A-Z][a-z]';  -- starts with an uppercase letter followed by a lowercase letter
 SELECT * FROM classicmodels.employees WHERE jobTitle REGEXP '^[A-Z][a-z]{2}';  -- starts with an uppercase letter followed by 2 lowercase letters
 SELECT * FROM classicmodels.employees WHERE jobTitle REGEXP '^[A-Z][a-z]{2,}';  -- starts with an uppercase letter followed by 2 or more lowercase letters
+
+-- WHERE: with IS NULL and IS NOT NULL
+SELECT * FROM classicmodels.orders WHERE comments IS NULL;  -- returns rows where comments is NULL
+SELECT * FROM classicmodels.orders WHERE comments IS NOT NULL;  -- returns rows where comments is NOT NULL
+SELECT * FROM classicmodels.orders WHERE comments IS NULL OR comments IS NOT NULL;  -- returns all rows
+SELECT * FROM classicmodels.orders WHERE comments IS NULL AND comments IS NOT NULL;  -- returns no rows
