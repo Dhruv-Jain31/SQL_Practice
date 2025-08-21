@@ -10,6 +10,11 @@ SELECT firstName, lastName FROM employees WHERE officeCode=1 ORDER BY firstName;
 -- changing the order of columns
 SELECT lastName, firstName FROM employees WHERE officeCode=1 ORDER BY firstName;
 
+-- order by clause with multiple columns
+SELECT * FROM customers ORDER BY creditLimit DESC; -- DESC for descending order
+SELECT * FROM customers ORDER BY creditLimit DESC, customerName ASC; -- multiple columns with different order first done by creditLimit in descending order and then by customerName in ascending order
+
+
 
 -- select clause with arithmetic expression for columns
 SELECT productcode,
@@ -89,3 +94,12 @@ SELECT * FROM classicmodels.orders WHERE comments IS NULL;  -- returns rows wher
 SELECT * FROM classicmodels.orders WHERE comments IS NOT NULL;  -- returns rows where comments is NOT NULL
 SELECT * FROM classicmodels.orders WHERE comments IS NULL OR comments IS NOT NULL;  -- returns all rows
 SELECT * FROM classicmodels.orders WHERE comments IS NULL AND comments IS NOT NULL;  -- returns no rows
+
+
+-- LIMIT operator
+SELECT * FROM classicmodels.customers LIMIT 10;  -- returns first 10 rows  
+SELECT * FROM classicmodels.customers LIMIT 10 OFFSET 5;  -- returns 10 rows starting from the 6th row
+SELECT * FROM classicmodels.customers LIMIT 5, 10;  -- returns 10 rows starting from the 6th row (same as above)
+
+-- LIMIT with ORDER BY
+SELECT * FROM classicmodels.customers ORDER BY creditLimit DESC LIMIT 5;  -- returns first 5 rows in descending order of creditLimit
