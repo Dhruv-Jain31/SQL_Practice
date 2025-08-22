@@ -30,3 +30,12 @@ SELECT orderNumber,
 FROM orders AS o
 JOIN customers AS c ON o.customerNumber = c.customerNumber  --first join
 JOIN employees AS e ON o.salesRepEmployeeNumber = e.employeeNumber; --second join
+
+
+-- using explicit JOIN syntax
+SELECT p.customerNumber,
+        paymentDate,
+        amount,
+        customerName
+FROM payments p, customers c
+WHERE p.customerNumber = c.customerNumbe;  -- here we are joining two tables with JOIN syntax
