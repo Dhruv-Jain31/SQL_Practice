@@ -39,3 +39,12 @@ SELECT p.customerNumber,
         customerName
 FROM payments p, customers c
 WHERE p.customerNumber = c.customerNumbe;  -- here we are joining two tables with JOIN syntax
+
+-- self join: we join table with itself
+SELECT emp.employeeNumber,
+        emp.firstName,
+        emp.jobTitle,
+        mgr.firstName AS "Manager First Name",
+        mgr.jobTitle
+FROM employees emp
+JOIN employees mgr ON emp.reportsTo = mgr.employeeNumber;  -- here we are joining employees table with itself to get manager details
