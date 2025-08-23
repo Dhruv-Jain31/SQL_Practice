@@ -68,3 +68,15 @@ JOIN offices ON employees.officeCode = offices.officeCode  -- joining employees 
 WHERE officeCode IN (1,2,3,4,5,6)
 GROUP BY officeCode
 HAVING employeeCnt > 5; -- filtering offices with more than 5 employees
+
+
+-- Total payments from each customer after a certain date
+SELECT 
+    customerNumber,  -- selecting customer number
+    customerName,
+    SUM(amount) AS totalOrderValue
+FROM payements
+JOIN customers using (customerNumber)  -- joining payments and customers table on customer number
+WHERE paymentDate > '2005-01-01'  -- filtering payments after a certain date
+GROUP BY customerNumber, customerName
+HAVING totalOrderValue > 5000  -- filtering customers with total payments
