@@ -32,3 +32,27 @@ FROM payments
 WHERE customerNumber = 103;  -- for a specific customer
 
 
+-- GROUP BY clause is used with aggregate functions to group the result set by one or more columns.
+SELECT 
+    productline,  -- selecting product line
+    COUNT(*) AS productCount,
+FROM products
+GROUP BY productline;  -- grouping by product line
+
+-- GROUP BY with multiple columns
+SELECT 
+    productline,  -- selecting product line
+    productScale,  -- selecting product scale
+    COUNT(*) AS productCount    
+FROM products
+GROUP BY productline, productScale;  -- grouping by product line and product scale
+
+-- GROUP BY WITH JOIN
+SELECT 
+    officeCode,  -- selecting office code
+    city,  -- selecting city
+    state,  -- selecting state
+    COUNT(employeeNumber) AS employeeCount  -- counting number of employees in each office
+FROM employees
+JOIN offices ON employees.officeCode = offices.officeCode  -- joining employees and offices table on office code
+GROUP BY officeCode, city, state;  -- grouping by office code, city and state
