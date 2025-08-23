@@ -56,3 +56,15 @@ SELECT
 FROM employees
 JOIN offices ON employees.officeCode = offices.officeCode  -- joining employees and offices table on office code
 GROUP BY officeCode, city, state;  -- grouping by office code, city and state
+
+
+-- HAVING clause is used to filter records that work on aggregated data.
+SELECT 
+    officeCode,  -- selecting office code
+    city,  -- selecting city
+    COUNT(employeeNumber) AS employeeCnt -- counting number of employees in each office
+FROM employees
+JOIN offices ON employees.officeCode = offices.officeCode  -- joining employees and offices table on office code
+WHERE officeCode IN (1,2,3,4,5,6)
+GROUP BY officeCode
+HAVING employeeCnt > 5; -- filtering offices with more than 5 employees
