@@ -80,3 +80,25 @@ JOIN customers using (customerNumber)  -- joining payments and customers table o
 WHERE paymentDate > '2005-01-01'  -- filtering payments after a certain date
 GROUP BY customerNumber, customerName
 HAVING totalOrderValue > 5000  -- filtering customers with total payments
+
+
+-- Value of each unique order sorted by total order value in descending order
+SELECT
+    orderNumber,  -- selecting order number
+    SUM(quantityOrdered * priceEach) AS totalOrderValue
+FROM orderdetails
+GROUP BY orderNumber
+ORDER BY totalOrderValue DESC;  -- sorting by total order value in descending order
+
+
+-- Value of each unique order, and it's customer no., customer name, and order date sorted by total order value in descending order
+SELECT 
+    orderNumber,
+    customerNumber,
+    customerName,
+    SUM(quantityOrdered * priceEach) AS totalOrderValue,
+FROM orderdetails
+JOIN orders USING (orderNumber)
+JOIN customers USING (customerNumber)
+GROUP BY orderNumber
+ORDER BY totalOrderValue DESC;
