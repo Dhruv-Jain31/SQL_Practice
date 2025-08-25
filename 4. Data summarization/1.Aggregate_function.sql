@@ -137,4 +137,17 @@ SELECT country,
         COUNT(*) AS totalOrders
 FROM orders
 JOIN customers USING (customerNumber)
-GROUP BY country, orderDate;
+GROUP BY country, orderDate; 
+
+
+-- Find customers from france whose total order value > 80,000 across all their orders
+SELECT
+    c.customerNumber,
+    c.customerName,
+    SUM(od.quantityOrdered * od.priceEach) AS totalOrderValue
+FROM customers c
+JOIN orders o ON c.customerNumber = o.customerNumber
+JOIN orderdetails od ON o.orderNumber = od.orderNumber
+WHERE c.country = 'France'
+GROUP BY c.customerNumber, c.customerName
+HAVING totalOrderValue > 80000;
