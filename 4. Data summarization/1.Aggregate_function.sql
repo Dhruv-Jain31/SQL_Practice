@@ -102,3 +102,39 @@ JOIN orders USING (orderNumber)
 JOIN customers USING (customerNumber)
 GROUP BY orderNumber
 ORDER BY totalOrderValue DESC;
+
+
+-- Value of each unique order, and it's customer no., customer name, employee number, employee number, and order date sorted by total order value in descending order
+SELECT 
+    orderNumber,
+    customerNumber,
+    customerName,
+    employeeNumber,
+    CONCAT(firstName, ' ', lastName) AS employeeName,
+    orderDate,
+    SUM(quantityOrdered * priceEach) AS totalOrderValue
+FROM orderdetails
+JOIN orders USING (orderNumber)
+JOIN customers USING (customerNumber)
+JOIN employees
+    ON customers.salesRepEmployeeNumber = employees.employeeNumber
+GROUP BY orderNumber
+ORDER BY totalOrderValue DESC; 
+
+-- Number of orders through each sales representative
+SELECT COUNT(orderNumber) AS totalOrders,
+       employeeNumber,
+       CONCAT(firstName, ' ', lastName) AS employeeName
+FROM orders
+JOIN employees
+    ON orders.salesRepEmployeeNumber = employees.employeeNumber
+GROUP BY employeeNumber
+
+
+-- No. of orders through each country on each Date group by clause for two columns
+SELECT country,
+        orderDate,
+        COUNT(*) AS totalOrders
+FROM orders
+JOIN customers USING (customerNumber)
+GROUP BY country, orderDate;
